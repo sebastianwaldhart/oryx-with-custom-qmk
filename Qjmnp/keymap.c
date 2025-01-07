@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESCAPE,      KC_QUOTE,       KC_COMMA,       KC_DOT,         KC_P,           KC_Y,           KC_F,           KC_G,           KC_C,           KC_R,           KC_L,           KC_SLASH,       
     KC_TAB,         KC_A,           KC_O,           KC_E,           KC_U,           KC_I,           KC_D,           KC_H,           KC_T,           KC_N,           KC_S,           KC_MINUS,       
     KC_LEFT_SHIFT,  KC_SCLN,        KC_Q,           KC_J,           KC_K,           KC_X,           KC_B,           KC_M,           KC_W,           KC_V,           KC_Z,           KC_RIGHT_SHIFT, 
-    KC_LEFT_CTRL,   KC_LEFT_GUI,    KC_LEFT_ALT,    MO(5),          MO(1),          KC_SPACE,       KC_NO,          MO(2),          OSL(6),         KC_LBRC,        KC_RBRC,        KC_RIGHT_CTRL
+    KC_LEFT_CTRL,   KC_LEFT_GUI,    KC_LEFT_ALT,    MO(5),          MO(1),          KC_SPACE,       KC_NO,          MO(2),          KC_RIGHT_ALT,   KC_LBRC,        KC_RBRC,        KC_RIGHT_CTRL
   ),
 
   [_LOWER] = LAYOUT_planck_grid(
