@@ -5,6 +5,20 @@
 #include "eeprom.h"
 #include "i18n.h"
 
+#define SP_OVERRIDE(K, X) ko_make_basic(MOD_BIT(KC_RIGHT_ALT), (K), (X))
+
+/*{.trigger_mods = MOD_BIT(KC_RIGHT_ALT), \*/
+  /*.layers                                = ~0, \*/
+  /*.suppressed_mods                       = MOD_BIT(KC_RIGHT_ALT), \*/
+  /*.options                               = ko_options_default, \*/
+  /*.negative_mod_mask                     = 0, \*/
+  /*.custom_action                         = NULL, \*/
+  /*.trigger                               = (K), \*/
+  /*.replacement                           = (X), \*/
+  /*.context                               = NULL, \*/
+  /*.enabled                               = NULL, \*/
+/*}*/
+
 enum planck_keycodes {
   RGB_SLD = EZ_SAFE_RANGE,
   ST_MACRO_0,
@@ -21,6 +35,110 @@ enum planck_layers {
   _LAYER5,
   _LAYER6,
 };
+
+enum unicode_names {
+  UM_AE_LOWER,
+  UM_AE_UPPER,
+  UM_UE_LOWER,
+  UM_UE_UPPER,
+  UM_OE_LOWER,
+  UM_OE_UPPER,
+  MARK_A_LOWER,
+  MARK_A_UPPER,
+  MARK_E_LOWER,
+  MARK_E_UPPER,
+  MARK_I_LOWER,
+  MARK_I_UPPER,
+  MARK_O_LOWER,
+  MARK_O_UPPER,
+  MARK_U_LOWER,
+  MARK_U_UPPER,
+  UM_SS,
+  NJ_LOWER,
+  NJ_UPPER,
+  CUR_EUR,
+  INV_EX,
+  INV_QU,
+  MATH_MU,
+  MATH_DEGREE,
+  DBL_LEFT,
+  DBL_RIGHT,
+};
+
+enum tap_dance_names {
+  ACC_A,
+  ACC_E,
+  ACC_I,
+  ACC_O,
+  ACC_U,
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+  [UM_AE_LOWER] = 0x00E4,
+  [UM_AE_UPPER] = 0x00C4,
+  [UM_UE_LOWER] = 0x00FC,
+  [UM_UE_UPPER] = 0x00DC,
+  [UM_OE_LOWER] = 0x00F6,
+  [UM_OE_UPPER] = 0x00D6,
+  [MARK_A_LOWER] = 0x00E1,
+  [MARK_A_UPPER] = 0x00C1,
+  [MARK_E_LOWER] = 0x00E9,
+  [MARK_E_UPPER] = 0x00C9,
+  [MARK_I_LOWER] = 0x00ED,
+  [MARK_I_UPPER] = 0x00CD,
+  [MARK_O_LOWER] = 0x00F3,
+  [MARK_O_UPPER] = 0x00D3,
+  [MARK_U_LOWER] = 0x00FA,
+  [MARK_U_UPPER] = 0x00DA,
+  [UM_SS] = 0x00DF,
+  [NJ_LOWER] = 0x00F1,
+  [NJ_UPPER] = 0x00D1,
+  [CUR_EUR] = 0x20AC,
+  [INV_EX] = 0x00A1,
+  [INV_QU] = 0x00BF,
+  [MATH_MU] = 0x00B5,
+  [MATH_DEGREE] = 0x00B0,
+  [DBL_LEFT] = 0x00AB,
+  [DBL_RIGHT] = 0x00BB,
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+  [ACC_A] = ACTION_TAP_DANCE_DOUBLE(UP(UM_AE_LOWER, UM_AE_UPPER), UP(MARK_A_LOWER, MARK_A_UPPER)),
+  [ACC_O] = ACTION_TAP_DANCE_DOUBLE(UP(UM_OE_LOWER, UM_OE_UPPER), UP(MARK_O_LOWER, MARK_O_UPPER)),
+  [ACC_U] = ACTION_TAP_DANCE_DOUBLE(UP(UM_UE_LOWER, UM_UE_UPPER), UP(MARK_U_LOWER, MARK_U_UPPER)),
+};
+
+const key_override_t override_a = SP_OVERRIDE(KC_A, TD(ACC_A));
+const key_override_t override_e = SP_OVERRIDE(KC_E, UP(MARK_E_LOWER, MARK_E_UPPER));
+const key_override_t override_i = SP_OVERRIDE(KC_I, UP(MARK_I_LOWER, MARK_I_UPPER));
+const key_override_t override_o = SP_OVERRIDE(KC_O, TD(ACC_O));
+const key_override_t override_u = SP_OVERRIDE(KC_U, TD(ACC_U));
+const key_override_t override_n = SP_OVERRIDE(KC_N, UP(NJ_LOWER, NJ_UPPER));
+const key_override_t override_s = SP_OVERRIDE(KC_S, UC(UM_SS));
+const key_override_t override_m = SP_OVERRIDE(KC_M, UC(MATH_MU));
+const key_override_t override_c = SP_OVERRIDE(KC_C, UC(CUR_EUR));
+const key_override_t override_esc = SP_OVERRIDE(KC_ESCAPE, UC(MATH_DEGREE));
+const key_override_t override_slash = SP_OVERRIDE(KC_SLASH, UP(INV_EX, INV_QU));
+const key_override_t override_quote = SP_OVERRIDE(KC_QUOTE, UC(DBL_LEFT));
+const key_override_t override_comma = SP_OVERRIDE(KC_COMMA, UC(DBL_RIGHT));
+
+const key_override_t *overrides[] = {
+  &override_a,
+  &override_e,
+  &override_i,
+  &override_o,
+  &override_u,
+  &override_n,
+  &override_s,
+  &override_m,
+  &override_c,
+  &override_esc,
+  &override_slash,
+  &override_quote,
+  &override_comma
+};
+
+const key_override_t **key_overrides = (const key_override_t**)overrides;
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
@@ -64,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LAYER5] = LAYOUT_planck_grid(
     QK_LLCK,        KC_NO,          KC_NO,          KC_MS_UP,       KC_NO,          KC_AUDIO_VOL_UP,KC_NO,          KC_MS_BTN1,     KC_UP,          KC_MS_BTN2,     KC_MS_BTN3,     KC_BRIGHTNESS_UP,
     KC_NO,          KC_NO,          KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_AUDIO_VOL_DOWN,KC_NO,          KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_MS_WH_UP,    KC_BRIGHTNESS_DOWN,
-    KC_TRANSPARENT, KC_NO,          KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_MS_WH_DOWN,  RGB_TOG,        
+    KC_TRANSPARENT, KC_NO,          KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_AUDIO_MUTE,  KC_NO,          UC_WIN,          UC_LINX,          UC_MAC,          KC_MS_WH_DOWN,  RGB_TOG,        
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_NO,          MU_TOGG,        AU_TOGG,        KC_NO
   ),
 
