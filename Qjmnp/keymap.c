@@ -5,12 +5,20 @@
 #include "eeprom.h"
 #include "i18n.h"
 
-#define create_override(T, NT, K, X) {\
+
+#define MOD_IGNORE_ALWAYS \
+  MOD_BIT(KC_LEFT_CTRL) | \
+  MOD_BIT(KC_RIGHT_CTRL) | \
+  MOD_BIT(KC_LEFT_GUI) | \
+  MOD_BIT(KC_RIGHT_GUI) | \
+  MOD_BIT(KC_LEFT_ALT)
+
+#define create_override(T, IT, NT, K, X) {\
   .trigger_mods                          = (T), \
   .layers                                = ~(1 << _LAYER6), \
-  .suppressed_mods                       = (NT), \
+  .suppressed_mods                       = (IT), \
   .options                               = ko_options_default, \
-  .negative_mod_mask                     = 0, \
+  .negative_mod_mask                     = (NT), \
   .custom_action                         = NULL, \
   .trigger                               = (K), \
   .replacement                           = (X), \
@@ -107,9 +115,51 @@ tap_dance_action_t tap_dance_actions[] = {
   [ACC_U] = ACTION_TAP_DANCE_DOUBLE(UP(UM_UE_LOWER, UM_UE_UPPER), UP(MARK_U_LOWER, MARK_U_UPPER)),
 };
 
+const key_override_t override_shift_2 = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_2, RALT(KC_Q));
+const key_override_t override_at = create_override(0, 0, 0, KC_AT, RALT(KC_Q));
+const key_override_t override_shift_3 = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_2, KC_NUHS);
+const key_override_t override_hash = create_override(0, 0, 0, KC_HASH, KC_NUHS);
+const key_override_t override_shift_6 = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_6, KC_GRAVE);
+const key_override_t override_circ = create_override(0, 0, 0, KC_CIRC, KC_GRAVE);
+const key_override_t override_shift_7 = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_7, KC_6);
+const key_override_t override_ampr = create_override(0, 0, 0, KC_AMPR, LSFT(KC_6));
+const key_override_t override_shift_8 = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_8, KC_RBRC);
+const key_override_t override_astr = create_override(0, 0, 0, KC_ASTR, LSFT(KC_RBRC));
+const key_override_t override_shift_9 = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_9, KC_8);
+const key_override_t override_lprn = create_override(0, 0, 0, KC_LPRN, LSFT(KC_8));
+const key_override_t override_shift_0 = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_0, KC_9);
+const key_override_t override_rprn = create_override(0, 0, 0, KC_RPRN, LSFT(KC_9));
+
+const key_override_t override_quote = create_override(0, 0, MOD_MASK_SHIFT, KC_QUOTE, KC_PIPE);
+const key_override_t override_dqot = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_QUOTE, KC_2);
+const key_override_t override_less = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_COMMA, KC_NUBS);
+const key_override_t override_more = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_DOT, KC_NUBS);
+
+const key_override_t override_scln = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_SCLN, LSFT(KC_COMMA));
+const key_override_t override_colon = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_SCLN, KC_DOT);
+
+const key_override_t override_slash = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_SLASH, LSFT(KC_7));
+const key_override_t override_quest = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_SLASH, LSFT(KC_MINUS));
+const key_override_t override_minus = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_MINUS, KC_SLASH);
+const key_override_t override_undr = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_MINUS, LSFT(KC_SLASH));
+const key_override_t override_equal = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_EQUAL, LSFT(KC_0));
+const key_override_t override_plus = create_override(MOD_MASK_SHIFT, 0, MOD_MASK_SHIFT | MOD_IGNORE_ALWAYS, KC_EQUAL, KC_RBRC);
+const key_override_t override_bsls = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_BSLS, RALT(KC_MINUS));
+const key_override_t override_pipe = create_override(MOD_MASK_SHIFT, 0, MOD_MASK_SHIFT | MOD_IGNORE_ALWAYS, KC_BSLS, RALT(KC_NUBS));
+const key_override_t override_pipe2 = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_PIPE, RALT(KC_NUBS));
+const key_override_t override_undr2 = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_PIPE, LSFT(KC_SLASH));
+
+const key_override_t override_lbrc = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_LBRC, RALT(KC_8));
+const key_override_t override_rbrc = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_RBRC, RALT(KC_9));
+const key_override_t override_lcbr = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_LCBR, RALT(KC_7));
+const key_override_t override_rcbr = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_RCBR, RALT(KC_0));
+/*const key_override_t override_lprn = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_LPRN, LSFT(KC_8)); defined above */
+/*const key_override_t override_rprn = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_RPRN, LSFT(KC_9)); defined above */
+
+const key_override_t override_y = create_override(0, 0, 0, KC_Y, KC_Z);
+const key_override_t override_z = create_override(0, 0, 0, KC_Z, KC_Y);
+
 /*
- *const key_override_t override_slash = create_override(0, 0, KC_SLASH, KC_AMPR);
- *const key_override_t override_quest = create_override(0, 0, KC_SLASH, KC_AMPR);
  *
  *const key_override_t override_a = SP_OVERRIDE(KC_A, TD(ACC_A));
  *const key_override_t override_e = SP_OVERRIDE(KC_E, UP(MARK_E_LOWER, MARK_E_UPPER));
@@ -125,24 +175,54 @@ tap_dance_action_t tap_dance_actions[] = {
  *const key_override_t override_quote = SP_OVERRIDE(KC_QUOTE, UC(DBL_LEFT));
  *const key_override_t override_comma = SP_OVERRIDE(KC_COMMA, UC(DBL_RIGHT));
  *
- *const key_override_t *overrides[] = {
- *  &override_a,
- *  &override_e,
- *  &override_i,
- *  &override_o,
- *  &override_u,
- *  &override_n,
- *  &override_s,
- *  &override_m,
- *  &override_c,
- *  &override_esc,
- *  &override_slash,
- *  &override_quote,
- *  &override_comma
- *};
- *
- *const key_override_t **key_overrides = (const key_override_t**)overrides;
  */
+
+const key_override_t *overrides[] = {
+  &override_shift_2,
+  &override_at,
+  &override_shift_3,
+  &override_hash,
+  &override_shift_6,
+  &override_circ,
+  &override_shift_7,
+  &override_ampr,
+  &override_shift_8,
+  &override_astr,
+  &override_shift_9,
+  &override_lprn,
+  &override_shift_0,
+  &override_rprn,
+
+  &override_z,
+  &override_y,
+
+  &override_quote,
+  &override_dqot,
+  &override_less,
+  &override_more,
+
+  &override_colon,
+  &override_scln,
+  &override_quest,
+  &override_slash,
+  &override_undr,
+  &override_minus,
+  &override_plus,
+  &override_equal,
+  &override_pipe,
+  &override_bsls,
+  &override_pipe2,
+  &override_undr2,
+
+  &override_lbrc,
+  &override_rbrc,
+  &override_lcbr,
+  &override_rcbr,
+  &override_lprn,
+  &override_rprn,
+};
+
+const key_override_t **key_overrides = (const key_override_t**)overrides;
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
