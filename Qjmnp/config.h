@@ -31,7 +31,7 @@
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX 36
 
-#define SERIAL_NUMBER "Qjmnp/7vWQxJ"
+#define SERIAL_NUMBER "Qjmnp/B4XwlB"
 #define LAYER_STATE_8BIT
 #define COMBO_COUNT 1
 
