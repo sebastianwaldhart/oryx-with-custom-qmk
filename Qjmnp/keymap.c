@@ -141,13 +141,13 @@ const key_override_t override_colon = create_override(MOD_MASK_SHIFT, 0, MOD_IGN
 const key_override_t override_slash = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_SLASH, LSFT(KC_7));
 const key_override_t override_quest = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_SLASH, LSFT(KC_MINUS));
 const key_override_t override_minus = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_MINUS, KC_SLASH);
-const key_override_t override_undr = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_MINUS, LSFT(KC_SLASH));
+const key_override_t override_unds = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_MINUS, LSFT(KC_SLASH));
 const key_override_t override_equal = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_EQUAL, LSFT(KC_0));
 const key_override_t override_plus = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_EQUAL, KC_RBRC);
 const key_override_t override_bsls = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_BSLS, RALT(KC_MINUS));
 const key_override_t override_pipe = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_BSLS, RALT(KC_NUBS));
 const key_override_t override_pipe2 = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_PIPE, RALT(KC_NUBS));
-const key_override_t override_undr2 = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_PIPE, LSFT(KC_SLASH));
+const key_override_t override_unds2 = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_UNDS, LSFT(KC_SLASH));
 
 const key_override_t override_lbrc = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_LBRC, RALT(KC_8));
 const key_override_t override_rbrc = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_RBRC, RALT(KC_9));
@@ -205,14 +205,14 @@ const key_override_t *overrides[] = {
   &override_scln,
   &override_quest,
   &override_slash,
-  &override_undr,
+  &override_unds,
   &override_minus,
   &override_plus,
   &override_equal,
   &override_pipe,
   &override_bsls,
   &override_pipe2,
-  &override_undr2,
+  &override_unds2,
 
   &override_lbrc,
   &override_rbrc,
