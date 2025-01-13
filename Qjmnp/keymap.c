@@ -143,9 +143,9 @@ const key_override_t override_quest = create_override(MOD_MASK_SHIFT, 0, MOD_IGN
 const key_override_t override_minus = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_MINUS, KC_SLASH);
 const key_override_t override_undr = create_override(MOD_MASK_SHIFT, 0, MOD_IGNORE_ALWAYS, KC_MINUS, LSFT(KC_SLASH));
 const key_override_t override_equal = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_EQUAL, LSFT(KC_0));
-const key_override_t override_plus = create_override(MOD_MASK_SHIFT, 0, MOD_MASK_SHIFT | MOD_IGNORE_ALWAYS, KC_EQUAL, KC_RBRC);
+const key_override_t override_plus = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_EQUAL, KC_RBRC);
 const key_override_t override_bsls = create_override(0, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_BSLS, RALT(KC_MINUS));
-const key_override_t override_pipe = create_override(MOD_MASK_SHIFT, 0, MOD_MASK_SHIFT | MOD_IGNORE_ALWAYS, KC_BSLS, RALT(KC_NUBS));
+const key_override_t override_pipe = create_override(MOD_MASK_SHIFT, MOD_MASK_SHIFT, MOD_IGNORE_ALWAYS, KC_BSLS, RALT(KC_NUBS));
 const key_override_t override_pipe2 = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_PIPE, RALT(KC_NUBS));
 const key_override_t override_undr2 = create_override(0, 0, MOD_IGNORE_ALWAYS, KC_PIPE, LSFT(KC_SLASH));
 
